@@ -37,48 +37,7 @@
 			
 		</table>
 		
-		<p>
-		
-		<p>The value of "temp" is:</p>
-		<p id="demo"></p>
-		
-		<p>Valor deve estar acima deste comentario:</p>
-		<p>
-		<p>
-		
-		
 		<output id="msgErro" name="msgErro">"${msgErro}"</output>
-
-
-		<script>
-		
-		//var msgErro = document.getElementById('msgErro').value;
-		//var msgErro = '"${msgErro}"'
-		var msgErro = '{"temp":"294","temp_min":"292","temp_max":"294"}';
-		
-		msg('{"temp":"John", "lastName":"Doe"}');
-		msg(msgErro);
-		
-		function msg(msgErro){
-		  //var obj = JSON.parse('{"temp":"John", "lastName":"Doe"}');
-		  
-		  alert('Entrou na function ' + msgErro);
-		  
-		  var obj = JSON.parse(msgErro);
-		  //var obj = JSON.parse(response);
-		  
-		  alert(msgErro);
-		  
-		  document.getElementById("demo").innerHTML = obj.temp;
-		}
-		
-		//msg(msgErro);
-		
-		</script>		
-		
-
-
-
 
 	</body>
 </html>

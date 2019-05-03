@@ -2,15 +2,12 @@ package br.com.clima.consultaClima.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -20,20 +17,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import ClimaService.ClimaService;
 import br.com.clima.Cidade;
-import br.com.clima.ClimaCidade;
 import br.com.clima.dao.CidadeDao;
-import br.com.clima.rest.exception.ServicoRestException;
 
 @Controller
 public class ClimaController{
@@ -113,13 +103,6 @@ public class ClimaController{
 		return mv;
 	}
 	
-	@RequestMapping("removeTarefa")
-	public String removeTarefa(ClimaCidade tarefa) throws SQLException{
-		CidadeDao dao = new CidadeDao();
-		dao.remove(tarefa);
-		return "redirect:listaTarefas";
-	}
-	
 	//@ResponseBody
 	@RequestMapping("mostraClima")
 	public String mostra (String codPais, String cidade, Model model) throws ServletException, IOException{		
@@ -140,6 +123,7 @@ public class ClimaController{
 			ResponseEntity<String> response = restTemplate.exchange(resourceURL, HttpMethod.GET, entity, String.class);
 			System.out.println(response);
 			model.addAttribute("msgErro",response);
+			model.addAttribute("cidade",cidade);
 			
 		}
 		catch (final HttpClientErrorException e) {
@@ -152,20 +136,11 @@ public class ClimaController{
 	           model.addAttribute("msgErro",e.getResponseBodyAsString());
 	        }
 	        model.addAttribute(e.getResponseBodyAsString());
-			return "clima/lista";
+			return "clima/mostra";
 	    }
 		
-		return "clima/lista";
+		return "clima/mostra";
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping("finalizaTarefa")
-	public String finaliza(Long id, Model model) throws SQLException {
-		CidadeDao dao = new CidadeDao();
-		dao.finaliza(id);
-		model.addAttribute("tarefa", dao.buscaPorId(id));
-		return "clima/dataFinalizada";
-				
-	}
 }
