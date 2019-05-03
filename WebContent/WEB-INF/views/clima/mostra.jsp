@@ -15,6 +15,36 @@
 		<h3>Previsão do Tempo - "${cidade}"</h3>
 
 		<output id="msgErro" name="msgErro">"${msgErro}"</output>
+
+
+		<p>
+		<p>
+		<p id="demo"></p>
+
+		<script>
+		
+			var msgErro = document.getElementById('msgErro').value;
+			//var msgErro = '{"temp":"294","temp_min":"292","temp_max":"294"}';
+			
+			//alert(msgErro);
+			
+			msg(msgErro);
+			
+			function msg(msgErro){
+			  //var obj = JSON.parse('{"temp":"John", "lastName":"Doe"}');
+			  
+			  //Erro no JSON.parse (JSON diferente do esperado)
+			  //var obj = JSON.parse(msgErro);
+			  
+			  //document.getElementById("demo").innerHTML = obj.temp;
+			}
+		
+		</script>
+		<p>
+		<p>
+
+
+
 		
 	</body>
 </html>
